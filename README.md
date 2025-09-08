@@ -3,7 +3,7 @@
 - 티스토리 블로그에 자동으로 글 업로드.
 
 ---
-# 요구사항
+## 요구사항
 
 - [ ] 자동 로그인
 - [ ] 마크다운 파일을 읽어서 마크다운 에디터에 입력
@@ -14,9 +14,13 @@
 - [ ] 해쉬태그 관련 키워드 입력
 
 ---
-# 기술 스택
+## 기술 스택
 
 - Python
 - Selenium
 
 ---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
