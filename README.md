@@ -40,3 +40,57 @@
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 설치 및 실행 (개발용)
+
+다음은 로컬 개발 환경에서 프로젝트를 설정하고 실행하는 기본 가이드입니다.
+
+1. 파이썬 가상환경 생성 (권장)
+
+```bash
+# macOS / zsh 예시
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+2. 의존성 설치
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+3. `.env` 파일 설정
+
+```bash
+cp .env.example .env
+# 편집하여 TISTORY_ID, TISTORY_PW, TISTORY_BLOG_NAME 등을 채워주세요
+```
+
+4. 브라우저 드라이버
+
+프로젝트는 Selenium과 `webdriver-manager`를 사용하여 드라이버를 자동으로 관리합니다. 추가 설정이 필요하면 `infra/browser.py`에 맞게 환경을 조정하세요.
+
+5. 실행
+
+일반적으로 GUI 없이 스크립트 모드로 실행하거나 GUI 모드로 실행할 수 있습니다.
+
+```bash
+# CLI 모드 (GUI 미사용)
+python main.py --no-gui
+
+# GUI 모드 (PyQt 기반, 향후 구현)
+python main.py --gui
+```
+
+6. 테스트 실행
+
+```bash
+pytest -q
+```
+
+7. 개발 노트
+
+- `.env`에는 민감한 정보가 포함되므로 절대 버전 관리에 커밋하지 마세요.
+- 첫 실행 시, 브라우저 자동 로그인/2차 인증 흐름은 수동 입력이 필요할 수 있습니다.
+- 로깅은 `infra/logger.py`로 초기화되며, 파일 핸들러은 추후 설정됩니다.

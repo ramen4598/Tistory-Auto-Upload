@@ -44,13 +44,13 @@ Created scaffolding (this run):
 MVP Focus (정상 글/이미지 업로드까지): 1.0 ~ 8.0 + 11.0 (결과 확인)
 Post-MVP: 카테고리/해시태그 고급 처리, 확장 기능, 추가 테스트 범위 등
 
-- [ ] 1.0 프로젝트 초기 구조 및 환경 세팅
+- [x] 1.0 프로젝트 초기 구조 및 환경 세팅
 	- [x] 1.1 디렉토리 스캐폴딩 생성 (`gui/`, `core/`, `automation/`, `infra/`, `tests/`)
-	- [ ] 1.2 `requirements.txt` 초안 작성 (selenium, PyQt5, python-dotenv, rich(optional))
+	- [x] 1.2 `requirements.txt` 초안 작성 (selenium, PyQt5, python-dotenv, rich(optional))
 	- [x] 1.2 `requirements.txt` 초안 작성 (selenium, PyQt5, python-dotenv, rich(optional))
 	- [x] 1.3 `.env.example` 작성 (TISTORY_ID, TISTORY_PW 등)
 	- [x] 1.4 기본 `main.py` 실행 엔트리 템플릿 추가
-	- [ ] 1.5 개발용 README 섹션에 초기 설치 방법 작성
+	- [x] 1.5 개발용 README 섹션에 초기 설치 방법 작성
 
 
 - [ ] 2.0 로깅/에러/설정 인프라 구축
