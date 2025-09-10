@@ -48,3 +48,11 @@ The following files must be referenced during each step:
   **PRD → Tasks → Process Tasks**  
 - `@` means adding a particular file to the context. It may vary depending on the tool you are using.
 - Always reference the correct base files in `/ai-dev-tasks/` when executing each step.
+
+## Enforcement: Single Subtask Rule
+
+- Always follow the `process-task-list.md` instructions: start only one subtask at a time. Before beginning any subtask, the AI must confirm with the user and receive an explicit "Go", "yes", or "y" reply.
+- After completing a subtask the AI must:
+  - Immediately mark it as completed in the related `tasks-*.md` file by changing `[ ]` to `[x]`.
+  - Pause and await the user's approval before starting the next subtask.
+- Exceptions may be made only when the user explicitly grants permission to batch tasks.
