@@ -20,9 +20,7 @@ def test_build_with_image_url_map_and_readability():
     builder = ContentBuilder(md)
     result = builder.build(image_url_map=image_url_map, readability_breaks=True)
     assert result == (
-        "1줄  \n"
-        "\n"
-        "\n"
+        "1줄<br>\n"
         "2줄\n"
         "![img1](https://cdn.com/foo.png)\n"
         "텍스트\n"

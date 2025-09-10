@@ -3,8 +3,8 @@ import re
 
 def apply_readability_breaks(md_text: str, enabled: bool = False) -> str:
     """ 
-    마크다운에서 줄 간 가시성을 보장하기 위해 두 줄 사이 빈 줄이 존재한다면 빈 줄의 존재를 보장하기 위해서 두 줄 사이에 두개의 공백과 두번의 개행을 삽입.
-	- 규칙 설명: "줄과 줄 사이에 빈 줄이 있을 경우" 두 줄 사이에 두 공백을 추가하고 두번 개행하여 마크다운에서 빈 줄의 존재를 명시적으로 보장합니다.
+    마크다운에서 줄 간 가시성을 보장하기 위해 빈 줄이 존재한다면 빈 줄의 존재를 보장하기 위해서 앞 줄에 `<br>` 태그를 삽입.
+	- 규칙 설명: 빈 줄이 있을 경우 앞 줄에 `<br>` 태그를 삽입하여 마크다운에서 빈 줄의 존재를 명시적으로 보장합니다.
 	- 입력 예시:
 		```markdown
 		1줄
@@ -15,9 +15,7 @@ def apply_readability_breaks(md_text: str, enabled: bool = False) -> str:
 		위 입력은 규칙 적용 시 다음과 같이 변환됩니다:
 
 		```markdown
-        1줄  
-
-
+        1줄<br>
         2줄
 		```
     """
@@ -32,9 +30,7 @@ def apply_readability_breaks(md_text: str, enabled: bool = False) -> str:
             result.append(line)
             continue
 
-        result[-1] = result[-1] + "  "  # 이전 줄 끝에 두 공백 추가
-        result.append("") # 현재 빈 줄 추가
-        result.append("") # 두번째 빈 줄 추가
+        result[-1] = result[-1] + "<br>"  # 이전 줄 끝에 <br> 추가
 
     return "\n".join(result)
 
