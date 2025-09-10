@@ -17,11 +17,21 @@ SELECTOR_EDITOR_BODY = "div.editor-body textarea, div.editor-body [contenteditab
 SELECTOR_IMAGE_UPLOAD_BTN = "button[aria-label='이미지']"
 SELECTOR_IMAGE_INPUT = "input[type='file']"
 
-# 타임아웃/대기 (초)
-DEFAULT_TIMEOUT = 10
-IMAGE_UPLOAD_TIMEOUT = 30
+
+# 타임아웃/재시도 정책 (초/회)
+DEFAULT_TIMEOUT = 10  # 기본 명시적 대기(Explicit Wait) 타임아웃
+IMAGE_UPLOAD_TIMEOUT = 30  # 이미지 업로드 최대 대기
+LOGIN_TIMEOUT = 20  # 로그인 시도 최대 대기
+POPUP_HANDLE_TIMEOUT = 8  # 팝업 감지/처리 대기
+
+# 재시도 정책
+RETRY_COUNT = 3  # 기본 재시도 횟수
+RETRY_INTERVAL = 2  # 재시도 간격(초)
+IMAGE_UPLOAD_RETRY = 2  # 이미지 업로드 재시도 횟수
+
+# 기타
 
 # 기타
 MAX_IMAGE_SIZE_MB = 10
 
-# TODO: 실제 셀렉터/URL/상수는 개발 과정에서 보완 및 확정
+# TODO: 실제 셀렉터/URL/상수 및 정책은 개발 과정에서 보완 및 확정
