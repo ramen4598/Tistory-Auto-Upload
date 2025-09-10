@@ -56,3 +56,13 @@ The following files must be referenced during each step:
   - Immediately mark it as completed in the related `tasks-*.md` file by changing `[ ]` to `[x]`.
   - Pause and await the user's approval before starting the next subtask.
 - Exceptions may be made only when the user explicitly grants permission to batch tasks.
+
+---
+
+## Python Test Location Policy
+
+- 모든 파이썬 테스트 코드는 반드시 `tests/` 폴더에 작성한다.
+- 파일 내 `if __name__ == "__main__":` 블록을 통한 직접 실행 테스트는 사용하지 않는다.
+- pytest 등 테스트 프레임워크를 활용한다.
+
+---
