@@ -54,7 +54,7 @@ Post-MVP: 카테고리/해시태그 고급 처리, 확장 기능, 추가 테스�
 
 
 - [ ] 2.0 로깅/에러/설정 인프라 구축
-	- [ ] 2.1 `infra/logger.py` 에 로거 초기화 (콘솔+파일 핸들러)
+	- [x] 2.1 `infra/logger.py` 에 로거 초기화 (콘솔+파일 핸들러)
 	- [ ] 2.2 `infra/exceptions.py` 커스텀 예외 정의(LoginError, UploadError 등)
 	- [ ] 2.3 `core/config.py` 환경변수 로드 (.env → os.environ fallback)
 	- [ ] 2.4 설정/상수 분리 (`core/constants.py` 셀렉터/URL placeholder)
