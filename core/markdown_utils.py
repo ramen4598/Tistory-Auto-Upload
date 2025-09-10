@@ -2,7 +2,7 @@ import re
 
 
 def apply_readability_breaks(md_text: str, enabled: bool = False) -> str:
-    """(Stub) 
+    """ 
     마크다운에서 줄 간 가시성을 보장하기 위해 두 줄 사이 빈 줄이 존재한다면 빈 줄의 존재를 보장하기 위해서 두 줄 사이에 두개의 공백과 두번의 개행을 삽입.
 	- 규칙 설명: "줄과 줄 사이에 빈 줄이 있을 경우" 두 줄 사이에 두 공백을 추가하고 두번 개행하여 마크다운에서 빈 줄의 존재를 명시적으로 보장합니다.
 	- 입력 예시:
@@ -20,13 +20,23 @@ def apply_readability_breaks(md_text: str, enabled: bool = False) -> str:
 
         2줄
 		```
-    현재 구현은 비워두고 원문을 그대로 반환합니다. 실제 전처리 로직은 추후 구현됩니다.
     """
     if not enabled:
         return md_text
 
-    # TODO: 실제 전처리 로직 구현
-    return md_text
+    lines = md_text.splitlines()
+    result = []
+    for i, line in enumerate(lines):
+        # 첫 줄이거나 빈 줄이 아닐 경우 그냥 추가
+        if  i == 0 or line.strip() != "":
+            result.append(line)
+            continue
+
+        result[-1] = result[-1] + "  "  # 이전 줄 끝에 두 공백 추가
+        result.append("") # 현재 빈 줄 추가
+        result.append("") # 두번째 빈 줄 추가
+
+    return "\n".join(result)
 
 
 def extract_local_image_paths(md_text: str) -> list:
