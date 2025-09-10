@@ -16,6 +16,21 @@
 - `README.md` - 사용/설치/문제 해결 문서
 - `requirements.txt` - 의존성 관리 (Selenium, PyQt5 등)
 
+Created scaffolding (this run):
+
+- `main.py` - 간단한 실행 엔트리 템플릿
+- `requirements.txt` - 초기 의존성 목록 (selenium, PyQt5, python-dotenv, rich, pytest)
+- `gui/__init__.py` - GUI 패키지 초기화
+- `gui/views.py` - PyQt 뷰 스켈레톤
+- `gui/dialogs.py` - PyQt 대화상자 스켈레톤(2차 인증 안내 등)
+- `core/__init__.py` - core 패키지 초기화
+- `core/markdown_utils.py` - 마크다운 전처리 유틸(줄 간 가시성 보장, 이미지 경로 추출)
+- `core/content_builder.py` - 컨텐츠 빌더(전처리 파이프라인)
+- `automation/__init__.py` - automation 패키지 초기화
+- `infra/__init__.py` - infra 패키지 초기화
+- `infra/logger.py` - 기본 로거 유틸
+- `.env.example` - 환경변수 예시
+
 ### Notes
 
 - Selenium 타임아웃/재시도 정책 명시 필요 (예: explicit wait wrapper)
@@ -30,11 +45,12 @@ MVP Focus (정상 글/이미지 업로드까지): 1.0 ~ 8.0 + 11.0 (결과 확�
 Post-MVP: 카테고리/해시태그 고급 처리, 확장 기능, 추가 테스트 범위 등
 
 - [ ] 1.0 프로젝트 초기 구조 및 환경 세팅
-	- [ ] 1.1 디렉토리 스캐폴딩 생성 (`gui/`, `core/`, `automation/`, `infra/`, `tests/`)
+	- [x] 1.1 디렉토리 스캐폴딩 생성 (`gui/`, `core/`, `automation/`, `infra/`, `tests/`)
 	- [ ] 1.2 `requirements.txt` 초안 작성 (selenium, PyQt5, python-dotenv, rich(optional))
 	- [ ] 1.3 `.env.example` 작성 (TISTORY_ID, TISTORY_PW 등)
 	- [ ] 1.4 기본 `main.py` 실행 엔트리 템플릿 추가
 	- [ ] 1.5 개발용 README 섹션에 초기 설치 방법 작성
+
 
 - [ ] 2.0 로깅/에러/설정 인프라 구축
 	- [ ] 2.1 `infra/logger.py` 에 로거 초기화 (콘솔+파일 핸들러)
@@ -43,12 +59,31 @@ Post-MVP: 카테고리/해시태그 고급 처리, 확장 기능, 추가 테스�
 	- [ ] 2.4 설정/상수 분리 (`core/constants.py` 셀렉터/URL placeholder)
 	- [ ] 2.5 타임아웃/재시도 정책 상수 정의
 
+
 - [ ] 3.0 마크다운 전처리 및 컨텐츠 빌더 모듈
-	- [ ] 3.1 `markdown_utils.py` 문장 구분 및 줄바꿈 규칙 구현
+    - [ ] 3.1 `markdown_utils.py` 문장 구분 및 줄바꿈 규칙 구현.
+	    - 구현상세: 마크다운에서 줄 간 가시성을 보장하기 위해 두 줄 사이 빈 줄이 존재한다면 빈 줄의 존재를 보장하기 위해서 두 줄 사이에 두개의 공백과 두번의 개행을 삽입.
+	    - 규칙 설명: "줄과 줄 사이에 빈 줄이 있을 경우" 두 줄 사이에 두 공백을 추가하고 두번 개행하여 마크다운에서 빈 줄의 존재를 명시적으로 보장합니다.
+	    - 입력 예시:
+		    ```markdown
+		    1줄
+
+		    2줄
+		    ```
+
+		    위 입력은 규칙 적용 시 다음과 같이 변환됩니다:
+
+		    ```markdown
+            1줄  
+
+
+            2줄
+		    ```
 	- [ ] 3.2 리스트/코드블록/표 라인 예외 처리 로직
 	- [ ] 3.3 이미지 태그/경로 파싱 함수 작성
 	- [ ] 3.4 `content_builder.py` (전처리 + 이미지 매핑 후 최종 문자열 생성)
 	- [ ] 3.5 유닛 테스트 초안 (전처리 규칙 검증)
+
 
 - [ ] 4.0 Selenium 브라우저/드라이버 레이어 구현
 	- [ ] 4.1 `infra/browser.py` WebDriver 팩토리 (ChromeOptions 설정)
