@@ -49,13 +49,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ```bash
 # macOS / zsh 예시
+# 개발 당시 python 3.13.7 사용
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
 2. 의존성 설치
-
 ```bash
+brew install qt
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
