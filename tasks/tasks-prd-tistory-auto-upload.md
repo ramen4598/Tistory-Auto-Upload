@@ -48,7 +48,7 @@ Post-MVP: 카테고리/해시태그 고급 처리, 확장 기능, 추가 테스�
 	- [x] 1.1 디렉토리 스캐폴딩 생성 (`gui/`, `core/`, `automation/`, `infra/`, `tests/`)
 	- [ ] 1.2 `requirements.txt` 초안 작성 (selenium, PyQt5, python-dotenv, rich(optional))
 	- [x] 1.2 `requirements.txt` 초안 작성 (selenium, PyQt5, python-dotenv, rich(optional))
-	- [ ] 1.3 `.env.example` 작성 (TISTORY_ID, TISTORY_PW 등)
+	- [x] 1.3 `.env.example` 작성 (TISTORY_ID, TISTORY_PW 등)
 	- [ ] 1.4 기본 `main.py` 실행 엔트리 템플릿 추가
 	- [ ] 1.5 개발용 README 섹션에 초기 설치 방법 작성
 
