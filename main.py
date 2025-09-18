@@ -23,11 +23,13 @@ def main(argv=None):
 
     if args.use_gui:
         logger.info('GUI 모드로 실행합니다 (PyQt)')
-        # TODO: GUI 초기화 로직 호출 (gui.views.MainView 등)
+        import gui.main_gui as main_gui
+        main_gui.run_gui(logger)
     else:
         logger.info('비-GUI(스크립트) 모드로 실행합니다')
-        # TODO: 스크립트 모드 실행 로직
-
+        import cli.main_cli as main_cli
+        main_cli.run_cli(logger)
+    logger.info('main.py : 종료')
 
 if __name__ == '__main__':
     try:
