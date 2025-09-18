@@ -29,7 +29,8 @@ def main(argv=None):
         logger.info('비-GUI(스크립트) 모드로 실행합니다')
         import cli.main_cli as main_cli
         main_cli.run_cli(logger)
-    logger.info('main.py : 종료')
+
+    logger.info('종료')
 
 if __name__ == '__main__':
     try:

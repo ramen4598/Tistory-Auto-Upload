@@ -10,9 +10,9 @@ def run_cli(logger):
     driver = browser.get_chrome_driver(headless=False)
     driver.get(TISTORY_LOGIN_URL)
 
-    # TODO 2. 로그인
-    # TODO 3. 이미지 업로드
-    # TODO 4. 본문 입력
-    # TODO 5. 업로드 결과 확인
-    # TODO 6. 종료 및 정리
-    logger.info('Tistory Auto Upload 종료')
+    # TODO 로그인
+    # TODO 이미지 업로드
+    # TODO 본문 입력
+    # TODO 업로드 결과 확인
+    # TODO 종료 및 정리
+    logger.info('종료')

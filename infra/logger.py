@@ -20,7 +20,7 @@ def get_logger(name: str = "tistory_auto_upload") -> logging.Logger:
 	os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
 	formatter = logging.Formatter(
-		fmt="%(asctime)s [%(levelname)s] %(name)s | %(message)s",
+		fmt="%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d | %(message)s",
 		datefmt="%Y-%m-%d %H:%M:%S"
 	)
 
