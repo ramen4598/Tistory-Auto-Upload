@@ -82,3 +82,18 @@ def safe_send_keys(element, text, clear_first=True):
     if clear_first:
         element.clear()
     element.send_keys(text)
+
+def safe_quit_driver(driver, logger=None):
+    """
+    드라이버를 안전하게 종료합니다. (예외 발생 시에도 무시)
+    Args:
+        driver: Selenium WebDriver 인스턴스
+        logger: 로깅 객체 (선택)
+    """
+    try:
+        driver.quit()
+    except Exception as e:
+        if logger:
+            logger.warning(f"WebDriver quit 실패: {e}")
+        else:
+            print(f"WebDriver quit 실패: {e}")
