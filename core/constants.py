@@ -6,8 +6,13 @@ core/constants.py
 """
 
 # URL
+from re import T
+
+
 TISTORY_LOGIN_URL = "https://www.tistory.com/auth/login"
-TISTORY_WRITE_URL = "https://{blog_name}.tistory.com/manage/post/write"
+TISTORY_WRITE_URL = "https://{blog_name}.tistory.com/manage/newpost/"
+TISTORY_HOME_URL = "https://www.tistory.com/"
+TISTORY_2FA_URL = "https://accounts.kakao.com/login/"
 
 # 셀렉터 (예시, 실제 값은 개발 중 보완)
 SELECTOR_ID_INPUT = "input#loginId"
@@ -19,10 +24,10 @@ SELECTOR_IMAGE_INPUT = "input[type='file']"
 
 
 # 타임아웃/재시도 정책 (초/회)
-DEFAULT_TIMEOUT = 10  # 기본 명시적 대기(Explicit Wait) 타임아웃
-IMAGE_UPLOAD_TIMEOUT = 30  # 이미지 업로드 최대 대기
-LOGIN_TIMEOUT = 20  # 로그인 시도 최대 대기
-POPUP_HANDLE_TIMEOUT = 8  # 팝업 감지/처리 대기
+DEFAULT_TIMEOUT = 2  # 기본 명시적 대기(Explicit Wait) 타임아웃
+IMAGE_UPLOAD_TIMEOUT = 20  # 이미지 업로드 최대 대기
+LOGIN_TIMEOUT = 10  # 로그인 시도 최대 대기
+POPUP_HANDLE_TIMEOUT = 5  # 팝업 감지/처리 대기
 
 # 재시도 정책
 RETRY_COUNT = 3  # 기본 재시도 횟수

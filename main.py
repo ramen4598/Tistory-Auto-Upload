@@ -1,5 +1,6 @@
 import sys
 import argparse
+import core.config as config
 from infra.logger import get_logger
 
 
@@ -8,7 +9,7 @@ def build_arg_parser():
     p = argparse.ArgumentParser(description='Tistory Auto Upload - 간단 실행기')
     p.add_argument('--gui', dest='use_gui', action='store_true', help='Run with PyQt GUI')
     p.add_argument('--no-gui', dest='use_gui', action='store_false', help='Run in headless/script mode')
-    p.set_defaults(use_gui=True)
+    p.set_defaults(use_gui=False)
     return p
 
 

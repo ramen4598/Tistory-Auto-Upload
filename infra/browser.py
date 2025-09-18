@@ -1,8 +1,12 @@
+import os, sys
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  
+from core.constants import DEFAULT_TIMEOUT
+
 def wait_for_visible(driver, selector, by=By.CSS_SELECTOR, timeout=10):
     """
     지정한 셀렉터가 DOM에 나타날 때까지 명시적으로 대기합니다.
@@ -34,7 +38,7 @@ def wait_for_clickable(driver, selector, by=By.CSS_SELECTOR, timeout=10):
     )
 
 
-def get_chrome_driver(headless: bool = True, user_agent: str = None, extra_options: dict = None):
+def get_chrome_driver(headless: bool = False, user_agent: str = None, extra_options: dict = None):
     """
     Chrome WebDriver를 생성하고 옵션을 적용합니다.
     Args:
@@ -57,6 +61,7 @@ def get_chrome_driver(headless: bool = True, user_agent: str = None, extra_optio
         for k, v in extra_options.items():
             options.add_argument(f'--{k}={v}') 
     driver = webdriver.Chrome(options=options)
+    driver.implicitly_wait(DEFAULT_TIMEOUT)  # 암묵적 대기 설정
     return driver
 
 def click_js(driver, element):
