@@ -84,9 +84,9 @@ Post-MVP: 카테고리/해시태그 고급 처리, 확장 기능, 추가 테스�
 
 
 - [ ] 4.0 Selenium 브라우저/드라이버 레이어 구현
-	- [ ] 4.1 `infra/browser.py` WebDriver 팩토리 (ChromeOptions 설정)
-	- [ ] 4.2 명시적 대기 유틸 (wait_for_visible 등)
-	- [ ] 4.3 공용 DOM 상호작용 헬퍼 (click_js, safe_send_keys)
+	- [x] 4.1 `infra/browser.py` WebDriver 팩토리 (ChromeOptions 설정)
+	- [x] 4.2 명시적 대기 유틸 (wait_for_visible 등)
+	- [x] 4.3 공용 DOM 상호작용 헬퍼 (click_js, safe_send_keys)
 	- [ ] 4.4 드라이버 종료/예외 처리 정리
 
 - [ ] 5.0 로그인 & 2차 인증 흐름 처리
