@@ -1,8 +1,7 @@
-import os, sys
+import os
+import sys
 import threading
 from time import sleep
-
-from requests import get
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from core.constants import TISTORY_LOGIN_URL, TISTORY_HOME_URL, TISTORY_2FA_URL, TISTORY_WRITE_URL
 import infra.browser as browser
@@ -74,7 +73,7 @@ def login_tistory(driver, logger):
             wait_2fa_login(logger)
 
         # 로그인 후 대기 (특정 url로 이동했는지 확인)
-        if driver.current_url == TISTORY_HOME_URL:
+        if driver.current_url.startswith(TISTORY_HOME_URL):
             logger.info('티스토리 로그인 성공')
         else:
             raise Exception('로그인 후 메인 페이지로 이동 실패')
@@ -111,7 +110,7 @@ def wait_2fa_login(logger):
         if user_input[0] == 'y':
             stop_event.set()  # 스레드 종료 신호
             break
-        print('경과시간 : ', cnt)
+        print('경과시간 : ', cnt) # 사용자 입력 대기 중임을 알리기 위한 출력
         cnt += 1
         sleep(1)
     
