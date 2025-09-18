@@ -1,7 +1,7 @@
 import sys
 import os
 import pytest
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from core.content_builder import ContentBuilder
 
 def test_build_with_image_url_map_and_readability():
