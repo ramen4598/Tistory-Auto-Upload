@@ -11,16 +11,16 @@ def run_cli(logger):
     logger.debug('CLI 모드 진입')
 
     driver = init_driver(logger)
-    if driver is None:return
+    if driver is None: return
 
     login_page_success = get_login_page(driver, logger)
-    if not login_page_success:return
+    if not login_page_success: return
 
     login_success = login_tistory(driver, logger)
-    if not login_success:return
+    if not login_success: return
 
     write_page_success = get_write_page(driver, logger)
-    if not write_page_success:return
+    if not write_page_success: return
 
     sleep(60)  # TODO: 임시 대기
 
