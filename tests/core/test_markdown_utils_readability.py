@@ -1,7 +1,7 @@
 import sys
 import os
 import pytest
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from core.markdown_utils import apply_readability_breaks
 
 # 빈 줄 뒤에 <br>이 들어갔는지 확인

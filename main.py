@@ -1,5 +1,6 @@
 import sys
 import argparse
+import core.config as config
 from infra.logger import get_logger
 
 
@@ -8,7 +9,7 @@ def build_arg_parser():
     p = argparse.ArgumentParser(description='Tistory Auto Upload - 간단 실행기')
     p.add_argument('--gui', dest='use_gui', action='store_true', help='Run with PyQt GUI')
     p.add_argument('--no-gui', dest='use_gui', action='store_false', help='Run in headless/script mode')
-    p.set_defaults(use_gui=True)
+    p.set_defaults(use_gui=False)
     return p
 
 
@@ -23,11 +24,14 @@ def main(argv=None):
 
     if args.use_gui:
         logger.info('GUI 모드로 실행합니다 (PyQt)')
-        # TODO: GUI 초기화 로직 호출 (gui.views.MainView 등)
+        import gui.main_gui as main_gui
+        main_gui.run_gui(logger)
     else:
         logger.info('비-GUI(스크립트) 모드로 실행합니다')
-        # TODO: 스크립트 모드 실행 로직
+        import cli.main_cli as main_cli
+        main_cli.run_cli(logger)
 
+    logger.info('종료')
 
 if __name__ == '__main__':
     try:

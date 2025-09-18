@@ -2,7 +2,7 @@
 import sys
 import os
 import pytest
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from core.markdown_utils import parse_image_paths
 
 def test_parse_image_paths_basic():
