@@ -108,7 +108,6 @@ def wait_2fa_login(logger):
 
     cnt = 0
     while cnt < 300:
-        logger.debug(user_input[0])
         if user_input[0] == 'y':
             stop_event.set()  # 스레드 종료 신호
             break
