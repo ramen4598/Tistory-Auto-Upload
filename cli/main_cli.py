@@ -70,11 +70,11 @@ def login_tistory(driver, logger):
         logger.debug('아이디/비밀번호 입력 및 제출 완료')
 
         # 2차 인증
-        if(driver.current_url.startswith(TISTORY_2FA_URL)):
+        if driver.current_url.startswith(TISTORY_2FA_URL):
             wait_2fa_login(logger)
 
         # 로그인 후 대기 (특정 url로 이동했는지 확인)
-        if(driver.current_url == TISTORY_HOME_URL):
+        if driver.current_url == TISTORY_HOME_URL:
             logger.info('티스토리 로그인 성공')
         else:
             raise Exception('로그인 후 메인 페이지로 이동 실패')

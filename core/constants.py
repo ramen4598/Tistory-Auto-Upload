@@ -6,9 +6,6 @@ core/constants.py
 """
 
 # URL
-from re import T
-
-
 TISTORY_LOGIN_URL = "https://www.tistory.com/auth/login"
 TISTORY_WRITE_URL = "https://{blog_name}.tistory.com/manage/newpost/"
 TISTORY_HOME_URL = "https://www.tistory.com/"
