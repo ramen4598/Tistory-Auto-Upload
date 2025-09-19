@@ -5,7 +5,7 @@ from .markdown_utils import apply_readability_breaks, extract_local_image_paths
 class ContentBuilder:
     def __init__(self, md_text: str, image_url_map: dict = None):
         self.md_text = md_text
-        self.image_url_map = image_url_map  # {로컬경로: 업로드URL} 매핑
+        self.image_url_map = image_url_map  # {local: url}
 
     def build(self, readability_breaks=True):
         """
