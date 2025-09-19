@@ -38,4 +38,3 @@ def extract_local_image_paths(md_text: str) -> list:
     """마크다운에서 로컬 이미지 경로를 추출합니다. 간단한 regex 사용."""
     pattern = r'!\[[^\]]*\]\(([^)]+)\)'
     return re.findall(pattern, md_text)
-
