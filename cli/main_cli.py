@@ -2,6 +2,8 @@ import os
 import sys
 import threading
 from time import sleep
+
+from infra.exceptions import LoginError
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from core.constants import TISTORY_LOGIN_URL, TISTORY_HOME_URL, TISTORY_2FA_URL, TISTORY_WRITE_URL
 import infra.browser as browser
@@ -76,7 +78,7 @@ def login_tistory(driver, logger):
         if driver.current_url.startswith(TISTORY_HOME_URL):
             logger.info('티스토리 로그인 성공')
         else:
-            raise Exception('로그인 후 메인 페이지로 이동 실패')
+            raise LoginError('로그인 후 메인 페이지로 이동 실패')
     except Exception as e:
         logger.exception('티스토리 로그인 실패: %s', e)
         browser.safe_quit_driver(driver)
@@ -119,7 +121,7 @@ def wait_2fa_login(logger):
         t.join(timeout=1)  # thread 종료 대기
 
     if cnt >= 300: # 5분 대기
-        raise Exception('2차 인증 시간 초과')
+        raise LoginError('2차 인증 시간 초과')
 
     logger.info('2차 인증 완료')
     return
