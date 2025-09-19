@@ -1,7 +1,7 @@
 import os
 import sys
 import threading
-from selenium.common.exceptions import ElementNotVisibleException
+from selenium.common.exceptions import TimeoutException
 from time import sleep
 
 from infra.exceptions import LoginError
@@ -136,7 +136,7 @@ def get_write_page(driver, logger):
 def ignore_alert(driver, logger):
     try:
         alert = browser.wait_for_alert(driver, timeout=3)
-    except ElementNotVisibleException:
+    except TimeoutException:
         return
 
     logger.info('5. 임시글 이어쓰기 팝업 무시')
