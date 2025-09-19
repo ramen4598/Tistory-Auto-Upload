@@ -9,40 +9,41 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from core.constants import TISTORY_LOGIN_URL, TISTORY_HOME_URL, TISTORY_2FA_URL, TISTORY_WRITE_URL
 import infra.browser as browser
 
-def run_cli(logger):
+def run_cli(logger, file_path):
     logger.debug('CLI 모드 진입')
 
-    driver = init_driver(logger)
-    if driver is None: return
+    try:
+        driver = init_driver(logger)
+    except Exception as e:
+        logger.exception(e)
+        return
+    
+    try:
+        get_login_page(driver, logger)     
+        login_tistory(driver, logger)
+        get_write_page(driver, logger)
+        ignore_alert(driver, logger)
+        markdown_content = read_markdown_file(logger, file_path)
+        image_url_map = upload_image(driver, logger, markdown_content)
+        input_content(driver, logger, markdown_content, image_url_map)
+        add_new_post(driver, logger)
+        sleep(60) # TODO: 디버깅용 임시 대기. 나중에 제거.
+    except Exception as e:
+        logger.exception(e)
+    finally:
+        browser.safe_quit_driver(driver)
 
-    login_page_success = get_login_page(driver, logger)
-    if not login_page_success: return
-
-    login_success = login_tistory(driver, logger)
-    if not login_success: return
-
-    write_page_success = get_write_page(driver, logger)
-    if not write_page_success: return
-
-    ignore_alert_success = ignore_alert(driver, logger)
-    if not ignore_alert_success: return
-
-    sleep(60)  # TODO: 임시 대기
-
-    # TODO 이미지 업로드
-    # TODO 본문 입력
-    # TODO 업로드 결과 확인
-    # TODO 종료 및 정리
     logger.debug('종료')
+
 
 def init_driver(logger):
     logger.info('1. 설정, 드라이버 초기화')
     try:
         driver = browser.get_chrome_driver()
+        if driver is None:
+            raise Exception('크롬 드라이버 초기화 실패')
     except Exception as e:
-        logger.exception('드라이버 초기화 실패: %s', e)
-        return None
-    logger.info('드라이버 초기화 완료')
+        raise Exception('드라이버 초기화 실패') from e
     return driver
 
 def get_login_page(driver, logger):
@@ -51,12 +52,8 @@ def get_login_page(driver, logger):
         driver.get(TISTORY_LOGIN_URL)
         login_btn = browser.wait_for_clickable(driver, 'a.btn_login.link_kakao_id', timeout=5)
         browser.click_js(driver, login_btn)
-        logger.info('티스토리 로그인 페이지 접속 완료')
     except Exception as e:
-        logger.exception('티스토리 로그인 페이지 접속 실패: %s', e)
-        browser.safe_quit_driver(driver)
-        return False
-    return True
+        raise Exception('티스토리 로그인 페이지 접속 실패') from e
 
 def login_tistory(driver, logger):
     logger.info('3. 티스토리 로그인')
@@ -84,10 +81,7 @@ def login_tistory(driver, logger):
         else:
             raise LoginError('로그인 후 메인 페이지로 이동 실패')
     except Exception as e:
-        logger.exception('티스토리 로그인 실패: %s', e)
-        browser.safe_quit_driver(driver)
-        return False
-    return True
+        raise LoginError('티스토리 로그인 실패') from e
 
 def wait_2fa_login(logger):
     logger.info('2차 인증 요청 감지')
@@ -136,24 +130,56 @@ def get_write_page(driver, logger):
         blog_name = os.getenv('TISTORY_BLOG_NAME')
         write_url = TISTORY_WRITE_URL.format(blog_name=blog_name)
         driver.get(write_url)
-        logger.info('글 작성 페이지 이동 완료')
     except Exception as e:
-        logger.exception('글 작성 페이지 이동 실패: %s', e)
-        browser.safe_quit_driver(driver)
-        return False
-    return True
+        raise Exception('글 작성 페이지 이동 실패') from e
 
 def ignore_alert(driver, logger):
     try:
         alert = browser.wait_for_alert(driver, timeout=3)
     except ElementNotVisibleException:
-        return True
+        return
 
-    logger.info('5. 임시글 이어쓰기 팝업')
+    logger.info('5. 임시글 이어쓰기 팝업 무시')
     try:
         alert.dismiss()  # 팝업 무시 (취소)
-        logger.info('임시글 이어쓰기 팝업 무시 완료')
-        return True
+        logger.debug('임시글 이어쓰기 팝업 무시 완료')
     except Exception as e:
-        logger.exception('임시글 이어쓰기 팝업 무시 실패: %s', e)
-        return False
+        raise Exception('임시글 이어쓰기 팝업 무시 실패') from e
+
+def read_markdown_file(logger, file_path):
+    logger.info('마크다운 파일 읽기')
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        logger.debug('마크다운 파일 읽기 완료')
+        return content
+    except Exception as e:
+        raise Exception('마크다운 파일 읽기 실패') from e
+
+def upload_image(driver, logger, markdown_content):
+    logger.info('6. 이미지 업로드')
+    logger.debug(markdown_content)
+    result = {}
+    # TODO 이미지 업로드
+    # 마크다운 파일 읽기
+    # 로컬 이미지 경로 추출
+    # 이미지 업로드
+    # 업로드된 이미지 URL 추출
+    # image_url_map (dict): {로컬경로: 업로드URL} 매핑 수행
+    return result
+
+def input_content(driver, logger, markdown_content, image_url_map):
+    logger.info('7. 본문 입력')
+    logger.debug(image_url_map)
+    # TODO 본문 입력
+    # markdown editor iframe 전환
+    # ContentBuilder 인스턴스 생성
+    # ContentBuilder.build() 사용
+    # editor에 본문 입력
+    # iframe 벗어나기
+
+def add_new_post(driver, logger):
+    logger.info('새 글 작성 버튼 클릭')
+    # TODO: 새글 작성 완료
+    # 비공개 업로드
+    # 업로드 결과 확인
