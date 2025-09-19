@@ -8,6 +8,17 @@ from selenium.webdriver.support import expected_conditions as EC
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  
 from core.constants import DEFAULT_TIMEOUT
 
+def wait_for_alert(driver, timeout=3):
+    """
+    지정한 시간 내에 alert가 나타날 때까지 명시적으로 대기합니다.
+    Args:
+        driver: Selenium WebDriver 인스턴스
+        timeout: 최대 대기 시간(초)
+    Returns:
+        Alert 객체: 발견된 alert
+    """
+    return WebDriverWait(driver, timeout).until(EC.alert_is_present())
+
 def wait_for_visible(driver, selector, by=By.CSS_SELECTOR, timeout=10):
     """
     지정한 셀렉터가 DOM에 나타날 때까지 명시적으로 대기합니다.

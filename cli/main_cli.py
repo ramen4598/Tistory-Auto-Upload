@@ -1,6 +1,7 @@
 import os
 import sys
 import threading
+from selenium.common.exceptions import ElementNotVisibleException
 from time import sleep
 
 from infra.exceptions import LoginError
@@ -22,6 +23,9 @@ def run_cli(logger):
 
     write_page_success = get_write_page(driver, logger)
     if not write_page_success: return
+
+    ignore_alert_success = ignore_alert(driver, logger)
+    if not ignore_alert_success: return
 
     sleep(60)  # TODO: 임시 대기
 
@@ -138,3 +142,18 @@ def get_write_page(driver, logger):
         browser.safe_quit_driver(driver)
         return False
     return True
+
+def ignore_alert(driver, logger):
+    try:
+        alert = browser.wait_for_alert(driver, timeout=3)
+    except ElementNotVisibleException:
+        return True
+
+    logger.info('5. 임시글 이어쓰기 팝업')
+    try:
+        alert.dismiss()  # 팝업 무시 (취소)
+        logger.info('임시글 이어쓰기 팝업 무시 완료')
+        return True
+    except Exception as e:
+        logger.exception('임시글 이어쓰기 팝업 무시 실패: %s', e)
+        return False
