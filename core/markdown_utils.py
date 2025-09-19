@@ -34,19 +34,6 @@ def apply_readability_breaks(md_text: str, enabled: bool = False) -> str:
 
     return "\n".join(result)
 
-def parse_image_paths(markdown_text):
-    """
-    마크다운 텍스트에서 이미지 경로(로컬 파일 포함)를 추출합니다.
-    예: ![alt](./img/foo.png) → './img/foo.png' 반환
-    Args:
-        markdown_text (str): 마크다운 원본 텍스트
-    Returns:
-        List[str]: 추출된 이미지 경로 리스트
-    """
-    # ![...](경로) 패턴 매칭
-    pattern = r'!\[[^\]]*\]\(([^)]+)\)'
-    return re.findall(pattern, markdown_text)
-
 def extract_local_image_paths(md_text: str) -> list:
     """마크다운에서 로컬 이미지 경로를 추출합니다. 간단한 regex 사용."""
     pattern = r'!\[[^\]]*\]\(([^)]+)\)'
